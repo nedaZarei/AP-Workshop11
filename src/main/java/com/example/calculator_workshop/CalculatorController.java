@@ -10,18 +10,30 @@ public class CalculatorController {
     @FXML
     private TextField textResult;
     private String operation = "";
-    private long firstNumber;
-    private long secondNumber;
+    private float firstNumber;
+    private float secondNumber;
 
     public void number(ActionEvent ae){
         Button button = (Button) ae.getSource();
-        String num = (button).getText();
-        textResult.setText(textResult.getText() + num);
+        String num = button.getText();
+
+         if(button.getText().equals(".")){
+            if(num.length() == 1){
+                textResult.setText("0.");
+            }
+            else {
+                textResult.setText(textResult.getText() + ".");
+            }
+        }
+        else{
+             textResult.setText(textResult.getText() + num);
+         }
     }
     public void operation(ActionEvent ae){
         Button button = (Button) ae.getSource();
-        String op = (button).getText();
-        if(button.getText().equals("c")){
+        String op = button.getText();
+
+        if(op.equals("c")){
             textResult.setText("");
         }
         else if(!op.equals("=")){
@@ -29,20 +41,20 @@ public class CalculatorController {
                 return;
             }
             operation = op;
-            firstNumber = Long.parseLong(textResult.getText());
+            firstNumber = Float.parseFloat(textResult.getText());
             textResult.setText("");
         }
         else{
             if(operation.equals("")){
                 return;
             }
-            secondNumber = Long.parseLong(textResult.getText());
+            secondNumber = Float.parseFloat(textResult.getText());
             calculate(firstNumber,secondNumber,operation);
             operation = "";
         }
     }
 
-    public void calculate(long firstNumber , long secondNumber , String operation){
+    public void calculate(float firstNumber , float secondNumber , String operation){
         switch (operation){
             case "*" :
                 textResult.setText(firstNumber*secondNumber+"");
