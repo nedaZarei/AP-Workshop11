@@ -15,10 +15,9 @@ public class CalculatorController {
 
     public void number(ActionEvent ae){
         Button button = (Button) ae.getSource();
-        String num = button.getText();
 
-         if(button.getText().equals(".")){
-            if(num.length() == 1){
+        if(button.getText().equals(".")){
+            if(textResult.getText().length() == 0){
                 textResult.setText("0.");
             }
             else {
@@ -26,8 +25,10 @@ public class CalculatorController {
             }
         }
         else{
-             textResult.setText(textResult.getText() + num);
-         }
+            String num = button.getText();
+            textResult.setText(textResult.getText() + num);
+        }
+
     }
     public void operation(ActionEvent ae){
         Button button = (Button) ae.getSource();
